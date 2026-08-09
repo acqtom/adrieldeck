@@ -259,6 +259,14 @@
   .anchor-was{display:flex;align-items:baseline;gap:.9cqw;margin-top:1.8cqw}
   .anchor-was .was{font-size:max(2.4cqw, 17px);font-weight:600;color:#6f645c;text-decoration:line-through;text-decoration-thickness:2px;letter-spacing:-.01em}
   .anchor-was .was-l{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .countdown{margin:1cqw 0 0;display:flex;align-items:baseline;gap:1cqw;flex-wrap:wrap}
+  .countdown[hidden]{display:none}
+  .countdown-label{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+  .countdown-label b{color:var(--orange);font-weight:600}
+  .countdown-timer{display:flex;align-items:baseline;gap:.6cqw}
+  .cd-unit{display:flex;align-items:baseline;gap:.2cqw;font-variant-numeric:tabular-nums}
+  .cd-n{font-family:var(--mono);font-size:max(1.3cqw, 15px);font-weight:600;color:var(--orange)}
+  .cd-l{font-family:var(--mono);font-size:max(.7cqw, 10px);color:var(--dim);text-transform:uppercase}
   .startprice .amt{font-size:max(7cqw, 40px);font-weight:600;letter-spacing:-.03em;line-height:.85;
     background:linear-gradient(95deg,#ffc35a,#ff8f30 40%,#f2661a 72%,#d9440a);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -269,7 +277,6 @@
   .bonusbox{border:1px solid var(--line);border-radius:7px;overflow:hidden}
   .bonus-h{display:flex;align-items:center;justify-content:space-between;padding:1.2cqw 1.5cqw;background:rgba(255,255,255,.02)}
   .bonus-h .bt{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
-  .today-badge{background:linear-gradient(135deg,#ff8a2b,#e2530a);color:#140a04;font-family:var(--mono);font-size:max(.76cqw, 10px);letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.55cqw .9cqw;border-radius:3px}
   .brow{display:flex;justify-content:space-between;align-items:center;gap:1cqw;padding:1.05cqw 1.5cqw;border-top:1px solid var(--line-soft)}
   .brow .bn{font-size:max(1.4cqw, 14px);color:var(--ink);font-weight:500}
   .brow .bn small{display:block;font-size:max(1cqw, 12px);color:var(--muted);margin-top:.25cqw;font-weight:400}
@@ -960,18 +967,25 @@
           <span class="eyebrow dot">Your spot is open</span>
           <h1 class="disp">Start today for as low as $415/mo.</h1>
           <p class="lead">The 24-month plan, split down the middle. Lock one of the five spots now — before it goes back to the standard rate.</p>
-          <div class="anchor-was"><span class="was">$12,000</span><span class="was-l">Normally</span></div>
+          <div class="anchor-was"><span class="was" id="anchorPrice">$12,000</span><span class="was-l">Normally</span></div>
+          <div class="countdown" id="countdown">
+            <span class="countdown-label">Price increases to <b>$15,000</b> in</span>
+            <div class="countdown-timer">
+              <span class="cd-unit"><span class="cd-n" id="cdD">3</span><span class="cd-l">d</span></span>
+              <span class="cd-unit"><span class="cd-n" id="cdH">00</span><span class="cd-l">h</span></span>
+              <span class="cd-unit"><span class="cd-n" id="cdM">00</span><span class="cd-l">m</span></span>
+              <span class="cd-unit"><span class="cd-n" id="cdS">00</span><span class="cd-l">s</span></span>
+            </div>
+          </div>
           <div class="startprice"><span class="amt">$415</span><span class="per">/ month</span></div>
           <div class="start-sub">On the 24-month plan · only 5 spots at this rate for this month</div>
           <div class="btn-fill">Claim your spot today →</div>
         </div>
         <div class="bonusbox">
-          <div class="bonus-h"><span class="bt">Start today and you also get</span><span class="today-badge">Today only</span></div>
-          <div class="brow"><span class="bn">Off-Market Deal Sourcing Pack<small>Scripts and lists to find lots before they hit the market.</small></span><span class="bv">$1,500</span></div>
-          <div class="brow"><span class="bn">Adriel's Underwriting Model<small>The exact deal calculator he runs every project through.</small></span><span class="bv">$2,000</span></div>
-          <div class="brow"><span class="bn">Vetted Lender &amp; Contractor Rolodex<small>Warm intros to capital and crews — not cold searches.</small></span><span class="bv">$3,000</span></div>
-          <div class="brow"><span class="bn">1-on-1 Onboarding Deal Audit<small>Your first deal — or buy box — reviewed live in week one.</small></span><span class="bv">$1,500</span></div>
-          <div class="btotal"><span class="l">Total bonus value</span><span class="r">$8,000</span></div>
+          <div class="bonus-h"><span class="bt">What's included</span></div>
+          <div class="brow"><span class="bn">Deal Review Before You Act<small>Every deal reviewed by Adriel before you sign — avoids costly mistakes and maximizes profit.</small></span><span class="bv">$5,000</span></div>
+          <div class="brow"><span class="bn">Lender, Contractor, Builder &amp; Materials Network<small>Vetted access across the board — saves $10K–$30K in mistakes per deal.</small></span><span class="bv">$7,000</span></div>
+          <div class="btotal"><span class="l">Total value</span><span class="r">$12,000</span></div>
         </div>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
@@ -1344,6 +1358,55 @@
   }, { passive: true });
 
   render();
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  // Evergreen 3-day price-increase countdown: each visitor's own deadline
+  // is set on first visit and persisted, so it counts down consistently on
+  // return visits within the window rather than resetting on every reload.
+  var COUNTDOWN_MS = 3 * 24 * 60 * 60 * 1000;
+  var STORAGE_KEY = "ib_price_deadline";
+  var anchorEl = document.getElementById("anchorPrice");
+  var countdownEl = document.getElementById("countdown");
+  if (!anchorEl || !countdownEl) return;
+
+  var deadline;
+  try {
+    deadline = Number(localStorage.getItem(STORAGE_KEY));
+    if (!deadline || isNaN(deadline)) {
+      deadline = Date.now() + COUNTDOWN_MS;
+      localStorage.setItem(STORAGE_KEY, String(deadline));
+    }
+  } catch (e) {
+    deadline = Date.now() + COUNTDOWN_MS;
+  }
+
+  var cdD = document.getElementById("cdD");
+  var cdH = document.getElementById("cdH");
+  var cdM = document.getElementById("cdM");
+  var cdS = document.getElementById("cdS");
+  var timer = null;
+
+  function pad2(n){ return n < 10 ? "0" + n : "" + n; }
+
+  function tick(){
+    var remaining = deadline - Date.now();
+    if (remaining <= 0){
+      anchorEl.textContent = "$15,000";
+      countdownEl.hidden = true;
+      if (timer) clearInterval(timer);
+      return;
+    }
+    var totalSec = Math.floor(remaining / 1000);
+    cdD.textContent = Math.floor(totalSec / 86400);
+    cdH.textContent = pad2(Math.floor((totalSec % 86400) / 3600));
+    cdM.textContent = pad2(Math.floor((totalSec % 3600) / 60));
+    cdS.textContent = pad2(totalSec % 60);
+  }
+  tick();
+  timer = setInterval(tick, 1000);
 })();
 </script>
 </body>
