@@ -273,17 +273,20 @@
   .start-sub{font-size:max(1.08cqw, 11px);color:var(--dim);letter-spacing:.02em;margin-bottom:1.8cqw}
   .btn-fill{display:inline-flex;align-items:center;gap:.6cqw;background:linear-gradient(135deg,#ff8a2b,#f2660f 70%,#e2530a);color:#140a04;font-weight:600;font-size:max(1.25cqw, 13px);padding:1.05cqw 1.9cqw;border-radius:5px;letter-spacing:.01em}
 
+  .teamproof{position:relative;border-radius:7px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/8;margin-top:1.6cqw}
+  .teamproof img{width:100%;height:100%;object-fit:cover;display:block;object-position:center 38%}
+  .teamproof-cap{position:absolute;left:.8cqw;top:.8cqw;font-family:var(--mono);font-size:max(.72cqw, 10px);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:.4cqw .7cqw;border-radius:3px}
   .bonusbox{border:1px solid var(--line);border-radius:7px;overflow:hidden}
-  .bonus-h{display:flex;align-items:center;justify-content:space-between;padding:1.2cqw 1.5cqw;background:rgba(255,255,255,.02)}
+  .bonus-h{display:flex;align-items:center;justify-content:space-between;padding:.85cqw 1.5cqw;background:rgba(255,255,255,.02)}
   .bonus-h .bt{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
-  .brow{display:flex;justify-content:space-between;align-items:center;gap:1cqw;padding:1.05cqw 1.5cqw;border-top:1px solid var(--line-soft)}
+  .brow{display:flex;justify-content:space-between;align-items:center;gap:1cqw;padding:.7cqw 1.5cqw;border-top:1px solid var(--line-soft)}
   .brow .bn{font-size:max(1.4cqw, 14px);color:var(--ink);font-weight:500}
   .brow .bn small{display:block;font-size:max(1cqw, 12px);color:var(--muted);margin-top:.25cqw;font-weight:400}
   .brow .bv{font-size:max(1.45cqw, 14px);font-weight:600;color:var(--orange);white-space:nowrap}
-  .btotal{display:flex;justify-content:space-between;align-items:center;padding:1.25cqw 1.5cqw;border-top:1px solid var(--line);background:rgba(242,106,27,.07)}
+  .btotal{display:flex;justify-content:space-between;align-items:center;padding:.85cqw 1.5cqw;border-top:1px solid var(--line);background:rgba(242,106,27,.07)}
   .btotal .l{font-size:max(1.25cqw, 13px);font-weight:500;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
   .btotal .r{font-size:max(2.1cqw, 16px);font-weight:600;color:var(--orange)}
-  .bgoal{display:flex;justify-content:space-between;align-items:center;padding:1.25cqw 1.5cqw;border-top:1px solid var(--line);background:rgba(34,197,94,.08)}
+  .bgoal{display:flex;justify-content:space-between;align-items:center;padding:.85cqw 1.5cqw;border-top:1px solid var(--line);background:rgba(34,197,94,.08)}
   .bgoal .l{font-size:max(1.25cqw, 13px);font-weight:500;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
   .bgoal .r{font-size:max(2.1cqw, 16px);font-weight:600;color:var(--green)}
   .prowf{display:flex;justify-content:space-between;align-items:center;gap:1cqw;padding:1.05cqw 1.7cqw;border-top:1px solid var(--line);min-height:4.4cqw}
@@ -510,6 +513,10 @@
 
     .flipshot{aspect-ratio:16/7}
     .flips{row-gap:1.1rem}
+
+    .teamproof{aspect-ratio:16/6;margin-top:1rem}
+    .brow{padding-top:.5rem;padding-bottom:.5rem}
+    .bonus-h,.btotal,.bgoal{padding-top:.65rem;padding-bottom:.65rem}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -981,6 +988,10 @@
           <div class="startprice"><span class="amt">$415</span><span class="per">/ month</span></div>
           <div class="start-sub">On the 24-month plan · only 5 spots at this rate for this month</div>
           <div class="btn-fill">Claim your spot today →</div>
+          <div class="teamproof">
+            <img src="team.jpg" alt="Adriel leading a live mentorship session on a job site">
+            <span class="teamproof-cap">Live cohort session</span>
+          </div>
         </div>
         <div class="bonusbox">
           <div class="bonus-h"><span class="bt">What's included</span></div>
