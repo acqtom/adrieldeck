@@ -256,14 +256,12 @@
   .s15 h1{font-size:max(4.6cqw, 23px);line-height:1.02;margin:1.1cqw 0 1.1cqw}
   .s15 .lead{font-size:max(1.3cqw, 13px);line-height:1.5;color:var(--muted);max-width:92%}
   .startprice{display:flex;align-items:baseline;gap:1cqw;margin:.5cqw 0 .5cqw}
-  .anchor-was{display:flex;align-items:baseline;gap:.9cqw;margin-top:1.8cqw}
-  .anchor-was .was{font-size:max(2.4cqw, 17px);font-weight:600;color:#6f645c;text-decoration:line-through;text-decoration-thickness:2px;letter-spacing:-.01em}
-  .anchor-was .was-l{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-  .countdown{margin:1cqw 0 0;display:flex;align-items:baseline;gap:1cqw;flex-wrap:wrap}
+  .countdown{margin:1.8cqw 0 0;display:flex;align-items:baseline;gap:1cqw;flex-wrap:wrap}
   .countdown[hidden]{display:none}
   .countdown-label{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
   .countdown-label b{color:var(--orange);font-weight:600}
   .countdown-timer{display:flex;align-items:baseline;gap:.6cqw}
+  .countdown-timer[hidden]{display:none}
   .cd-unit{display:flex;align-items:baseline;gap:.2cqw;font-variant-numeric:tabular-nums}
   .cd-n{font-family:var(--mono);font-size:max(1.3cqw, 15px);font-weight:600;color:var(--orange)}
   .cd-l{font-family:var(--mono);font-size:max(.7cqw, 10px);color:var(--dim);text-transform:uppercase}
@@ -967,10 +965,9 @@
           <span class="eyebrow dot">Your spot is open</span>
           <h1 class="disp">Start today for as low as $415/mo.</h1>
           <p class="lead">The 24-month plan, split down the middle. Lock one of the five spots now — before it goes back to the standard rate.</p>
-          <div class="anchor-was"><span class="was" id="anchorPrice">$12,000</span><span class="was-l">Normally</span></div>
           <div class="countdown" id="countdown">
-            <span class="countdown-label">Price increases to <b>$15,000</b> in</span>
-            <div class="countdown-timer">
+            <span class="countdown-label" id="countdownLabel">Price increases to <b>$15,000</b> in</span>
+            <div class="countdown-timer" id="countdownTimer">
               <span class="cd-unit"><span class="cd-n" id="cdD">3</span><span class="cd-l">d</span></span>
               <span class="cd-unit"><span class="cd-n" id="cdH">00</span><span class="cd-l">h</span></span>
               <span class="cd-unit"><span class="cd-n" id="cdM">00</span><span class="cd-l">m</span></span>
@@ -1368,9 +1365,10 @@
   // return visits within the window rather than resetting on every reload.
   var COUNTDOWN_MS = 3 * 24 * 60 * 60 * 1000;
   var STORAGE_KEY = "ib_price_deadline";
-  var anchorEl = document.getElementById("anchorPrice");
   var countdownEl = document.getElementById("countdown");
-  if (!anchorEl || !countdownEl) return;
+  var labelEl = document.getElementById("countdownLabel");
+  var timerEl = document.getElementById("countdownTimer");
+  if (!countdownEl || !labelEl || !timerEl) return;
 
   var deadline;
   try {
@@ -1394,8 +1392,8 @@
   function tick(){
     var remaining = deadline - Date.now();
     if (remaining <= 0){
-      anchorEl.textContent = "$15,000";
-      countdownEl.hidden = true;
+      labelEl.innerHTML = "Price is now <b>$15,000</b>";
+      timerEl.hidden = true;
       if (timer) clearInterval(timer);
       return;
     }
