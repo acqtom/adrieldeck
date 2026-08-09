@@ -1360,26 +1360,16 @@
 <script>
 (function(){
   "use strict";
-  // Evergreen 3-day price-increase countdown: each visitor's own deadline
-  // is set on first visit and persisted, so it counts down consistently on
-  // return visits within the window rather than resetting on every reload.
-  var COUNTDOWN_MS = 3 * 24 * 60 * 60 * 1000;
-  var STORAGE_KEY = "ib_price_deadline";
+  // Daily-resetting price-increase countdown: the deadline is always
+  // "today's local midnight + 2 days", recomputed fresh on every tick.
+  // That means it never needs any stored state — it naturally counts
+  // down from ~1d 23h 59m 59s (just after each midnight) to ~1d 00h
+  // (just before the next one), then jumps back up every day at
+  // midnight instead of ever permanently running out.
   var countdownEl = document.getElementById("countdown");
   var labelEl = document.getElementById("countdownLabel");
   var timerEl = document.getElementById("countdownTimer");
   if (!countdownEl || !labelEl || !timerEl) return;
-
-  var deadline;
-  try {
-    deadline = Number(localStorage.getItem(STORAGE_KEY));
-    if (!deadline || isNaN(deadline)) {
-      deadline = Date.now() + COUNTDOWN_MS;
-      localStorage.setItem(STORAGE_KEY, String(deadline));
-    }
-  } catch (e) {
-    deadline = Date.now() + COUNTDOWN_MS;
-  }
 
   var cdD = document.getElementById("cdD");
   var cdH = document.getElementById("cdH");
@@ -1389,8 +1379,14 @@
 
   function pad2(n){ return n < 10 ? "0" + n : "" + n; }
 
+  function nextDeadline(){
+    var now = new Date();
+    var todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return todayMidnight.getTime() + 2 * 86400000;
+  }
+
   function tick(){
-    var remaining = deadline - Date.now();
+    var remaining = nextDeadline() - Date.now();
     if (remaining <= 0){
       labelEl.innerHTML = "Price is now <b>$15,000</b>";
       timerEl.hidden = true;
