@@ -253,7 +253,7 @@
   .plan.norm .paydiv{background:var(--line)}
 
   /* ---------- Slide 15 (close) ---------- */
-  .s15 .split{grid-template-columns:0.95fr 1.12fr;align-items:center;gap:5cqw}
+  .s15 .split{grid-template-columns:0.95fr 1.12fr;align-items:start;gap:5cqw}
   .s15 h1{font-size:max(4.6cqw, 23px);line-height:1.02;margin:1.1cqw 0 1.1cqw}
   .s15 .lead{font-size:max(1.3cqw, 13px);line-height:1.5;color:var(--muted);max-width:92%}
   .startprice{display:flex;align-items:baseline;gap:1cqw;margin:.5cqw 0 .5cqw}
@@ -273,7 +273,7 @@
   .start-sub{font-size:max(1.08cqw, 11px);color:var(--dim);letter-spacing:.02em;margin-bottom:1.8cqw}
   .btn-fill{display:inline-flex;align-items:center;gap:.6cqw;background:linear-gradient(135deg,#ff8a2b,#f2660f 70%,#e2530a);color:#140a04;font-weight:600;font-size:max(1.25cqw, 13px);padding:1.05cqw 1.9cqw;border-radius:5px;letter-spacing:.01em}
 
-  .teamproof{position:relative;border-radius:7px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/8;margin-top:1.6cqw}
+  .teamproof{position:relative;border-radius:7px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/6.5;margin-bottom:1cqw}
   .teamproof img{width:100%;height:100%;object-fit:cover;display:block;object-position:center 38%}
   .teamproof-cap{position:absolute;left:.8cqw;top:.8cqw;font-family:var(--mono);font-size:max(.72cqw, 10px);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:.4cqw .7cqw;border-radius:3px}
   .bonusbox{border:1px solid var(--line);border-radius:7px;overflow:hidden}
@@ -514,7 +514,7 @@
     .flipshot{aspect-ratio:16/7}
     .flips{row-gap:1.1rem}
 
-    .teamproof{aspect-ratio:16/6;margin-top:1rem}
+    .teamproof{aspect-ratio:16/6;margin-top:1rem;margin-bottom:1rem}
     .brow{padding-top:.5rem;padding-bottom:.5rem}
     .bonus-h,.btotal,.bgoal{padding-top:.65rem;padding-bottom:.65rem}
   }
@@ -988,12 +988,13 @@
           <div class="startprice"><span class="amt">$415</span><span class="per">/ month</span></div>
           <div class="start-sub">On the 24-month plan · only 5 spots at this rate for this month</div>
           <div class="btn-fill">Claim your spot today →</div>
+        </div>
+        <div>
           <div class="teamproof">
             <img src="team.jpg" alt="Adriel leading a live mentorship session on a job site">
             <span class="teamproof-cap">Live cohort session</span>
           </div>
-        </div>
-        <div class="bonusbox">
+          <div class="bonusbox">
           <div class="bonus-h"><span class="bt">What's included</span></div>
           <div class="brow"><span class="bn">Deal Review Before You Act<small>Every deal reviewed by Adriel before you sign — avoids costly mistakes and maximizes profit.</small></span><span class="bv">$5,000</span></div>
           <div class="brow"><span class="bn">Lender, Contractor, Builder &amp; Materials Network<small>Vetted access across the board — saves $10K–$30K in mistakes per deal.</small></span><span class="bv">$7,000</span></div>
@@ -1001,6 +1002,7 @@
           <div class="brow"><span class="bn">Off-Market Inbound Deal Flow System<small>Save money on the buy — leads before they hit the market.</small></span><span class="bv">$3,000</span></div>
           <div class="btotal"><span class="l">Total value</span><span class="r">$25,000</span></div>
           <div class="bgoal"><span class="l">Objective</span><span class="r">$100,000–$300,000 exit</span></div>
+        </div>
         </div>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
