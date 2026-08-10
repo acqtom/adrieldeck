@@ -482,6 +482,8 @@
     letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
   }
   .pdfCanvas{display:block; box-shadow:0 10px 40px rgba(0,0,0,.45)}
+  .imgModal{height:min(70vh,720px)}
+  .proofImgFull{max-width:100%;max-height:100%;display:block;border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,.45)}
   .pdfModal-foot{
     display:flex; align-items:center; justify-content:center; gap:16px;
     padding:12px; border-top:1px solid var(--line); flex:0 0 auto;
@@ -862,12 +864,12 @@
           </div>
           <div class="vcard">
             <div class="vthumb">
-              <img src="thumbnails/deal-03.png" alt="Deal 03 thumbnail: single-family flip, $430k to $2.2M">
+              <img src="thumbnails/deal-03.png" alt="Deal 03 thumbnail: ground-up construction build, $430k to $2.2M">
               <span class="yt">FILMED LIVE</span>
             </div>
             <div class="vmeta">
-              <div class="vt">Deal 03 · The $430K → $2.2M Flip</div>
-              <div class="vsub">A single-family renovation that returned 5x on the purchase price.</div>
+              <div class="vt">Deal 03 · The $430K → $2.2M Build</div>
+              <div class="vsub">A 5x construction build.</div>
             </div>
             <div class="vstats">
               <div class="vs"><div class="n o">29K</div><div class="l">Views</div></div>
@@ -875,6 +877,7 @@
               <div class="vs"><div class="n">156</div><div class="l">Comments</div></div>
               <div class="vs"><div class="n">9:40</div><div class="l">Runtime</div></div>
             </div>
+            <a class="proofBtn" id="proofTriggerDeal3" href="thumbnails/deal-03-proof.png">Proof</a>
           </div>
         </div>
       </div>
@@ -1117,6 +1120,20 @@
       <button class="pdfModal-pagebtn" id="proofPrevPage" type="button" aria-label="Previous page">‹</button>
       <span class="pdfModal-pageind" id="proofPageIndicator">— / —</span>
       <button class="pdfModal-pagebtn" id="proofNextPage" type="button" aria-label="Next page">›</button>
+    </div>
+  </div>
+
+  <div class="pdfBackdrop" id="imgBackdrop" hidden></div>
+  <div class="pdfModal imgModal" id="imgModal" role="dialog" aria-modal="true" aria-label="Deal 03 numbers" aria-hidden="true" hidden>
+    <div class="pdfModal-head">
+      <span class="pdfModal-title">// Proof — Deal 03 Numbers</span>
+      <div class="pdfModal-actions">
+        <a class="pdfModal-fallback" id="imgFallbackLink" href="thumbnails/deal-03-proof.png" target="_blank" rel="noopener noreferrer">Open as file ↗</a>
+        <button class="pdfModal-close" id="imgModalClose" type="button" aria-label="Close image viewer">&times;</button>
+      </div>
+    </div>
+    <div class="pdfModal-body">
+      <img class="proofImgFull" id="proofImg" src="" alt="Deal 03 cost breakdown: land, closing, soft costs, land clearing, vertical build, and holding costs totaling $1.65M against a $2.1M–$2.2M estimated sale">
     </div>
   </div>
 
@@ -1565,6 +1582,43 @@
     }, { passive: true });
   }
 
+  // Deal 03 "Proof" — just a single image, so a lighter lightbox instead of
+  // the pdf.js viewer used for the CDs and appraisal document.
+  var proofTriggerDeal3 = document.getElementById("proofTriggerDeal3");
+  var imgBackdrop = document.getElementById("imgBackdrop");
+  var imgModal = document.getElementById("imgModal");
+  var imgModalClose = document.getElementById("imgModalClose");
+  var proofImg = document.getElementById("proofImg");
+
+  function imgIsOpen(){ return imgModal.classList.contains("open"); }
+  function openImg(src){
+    proofImg.src = src;
+    imgBackdrop.hidden = false;
+    imgModal.hidden = false;
+    window.requestAnimationFrame(function(){
+      imgBackdrop.classList.add("show");
+      imgModal.classList.add("open");
+    });
+    imgModal.setAttribute("aria-hidden", "false");
+  }
+  function closeImg(){
+    imgBackdrop.classList.remove("show");
+    imgModal.classList.remove("open");
+    imgModal.setAttribute("aria-hidden", "true");
+    window.setTimeout(function(){
+      if (!imgIsOpen()){ imgBackdrop.hidden = true; imgModal.hidden = true; }
+    }, 280);
+    if (proofTriggerDeal3) proofTriggerDeal3.focus({ preventScroll: true });
+  }
+  if (proofTriggerDeal3) {
+    proofTriggerDeal3.addEventListener("click", function(e){
+      e.preventDefault();
+      openImg(proofTriggerDeal3.getAttribute("href"));
+    });
+    imgModalClose.addEventListener("click", closeImg);
+    imgBackdrop.addEventListener("click", closeImg);
+  }
+
   function goTo(n){
     n = Math.max(0, Math.min(total - 1, n));
     if (n === current || animating) return;
@@ -1580,9 +1634,11 @@
   btnDown.addEventListener("click", next);
 
   window.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && imgIsOpen()) { closeImg(); return; }
     if (e.key === "Escape" && proofIsOpen()) { closeProof(); return; }
     if (e.key === "Escape" && pdfIsOpen()) { closePdf(); return; }
     if (e.key === "Escape" && menuIsOpen()) { closeMenu(); return; }
+    if (imgIsOpen()) return;
     if (proofIsOpen()){
       if (e.key === "ArrowRight") { e.preventDefault(); goProofDoc(1); }
       else if (e.key === "ArrowLeft") { e.preventDefault(); goProofDoc(-1); }
@@ -1602,7 +1658,7 @@
 
   var wheelLocked = false;
   window.addEventListener("wheel", function(e){
-    if (menuIsOpen() || pdfIsOpen() || proofIsOpen()) return;
+    if (menuIsOpen() || pdfIsOpen() || proofIsOpen() || imgIsOpen()) return;
     e.preventDefault();
     if (wheelLocked || Math.abs(e.deltaY) < 12) return;
     wheelLocked = true;
@@ -1612,11 +1668,11 @@
 
   var touchStartY = null;
   window.addEventListener("touchstart", function(e){
-    if (menuIsOpen() || pdfIsOpen() || proofIsOpen()) return;
+    if (menuIsOpen() || pdfIsOpen() || proofIsOpen() || imgIsOpen()) return;
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
   window.addEventListener("touchend", function(e){
-    if (menuIsOpen() || pdfIsOpen() || proofIsOpen() || touchStartY === null) return;
+    if (menuIsOpen() || pdfIsOpen() || proofIsOpen() || imgIsOpen() || touchStartY === null) return;
     var dy = touchStartY - e.changedTouches[0].clientY;
     touchStartY = null;
     if (Math.abs(dy) < 44) return;
