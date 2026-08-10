@@ -176,10 +176,15 @@
 
   /* ---------- Slide 9 ---------- */
   .s9 h1{font-size:max(4.4cqw, 22px);line-height:1.05;margin-top:1.4cqw;margin-bottom:2.2cqw;max-width:70%}
-  .recgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:2.4cqw 2.4cqw;flex:1;align-content:start}
+  .recgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:2.4cqw 2.4cqw;align-content:start}
   .rec{border-top:1px solid var(--line);padding-top:1cqw}
-  .rec .num{font-size:max(4.4cqw, 22px)}
+  .rec .num{font-size:max(4.4cqw, 22px);
+    background:linear-gradient(95deg,#ffc35a 0%,#ff8f30 34%,#f2661a 62%,#d9440a 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .rec .rl{font-size:max(1.15cqw, 12px);color:var(--muted);margin-top:.6cqw;line-height:1.3}
+  .statenote{border-top:1px solid var(--line);margin-top:2.4cqw;padding-top:1.6cqw;max-width:62cqw}
+  .statenote .tag{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.2em;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:.7cqw}
+  .statenote p{font-size:max(1.2cqw, 14px);line-height:1.55;color:var(--muted)}
 
   /* ---------- Slide 10 ---------- */
   .s10 .split{grid-template-columns:0.95fr 1.15fr;align-items:start;gap:5cqw}
@@ -735,6 +740,10 @@
         <div class="rec"><div class="num">$10M+</div><div class="rl">Capital raised</div></div>
         <div class="rec"><div class="num">235</div><div class="rl">Unit self-storage wholesaled</div></div>
         <div class="rec"><div class="num">$1M+</div><div class="rl">Equity created for a student (21-unit BRRRR)</div></div>
+      </div>
+      <div class="statenote">
+        <span class="tag">Multi-state</span>
+        <p>Adriel specializes in Texas — but the blueprint isn't limited to it. Students are running this same system in other states too. The playbook stays the same; the permitting, zoning, and regulations shift state to state, and that's exactly the part we already know how to navigate.</p>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
     </section>
