@@ -219,6 +219,15 @@
   .vstats .vs .n{font-size:max(1.2cqw, 12px);font-weight:600;color:var(--ink);letter-spacing:-.01em}
   .vstats .vs .n.o{color:var(--orange)}
   .vstats .vs .l{font-size:max(.68cqw, 10px);color:var(--muted);margin-top:.2cqw;line-height:1.2}
+  .proofBtn{
+    display:block;text-align:center;text-decoration:none;
+    margin:0 1.1cqw 1.1cqw;
+    border:1px solid var(--orange);color:var(--orange);
+    font-family:var(--mono);font-size:max(.8cqw, 11px);letter-spacing:.12em;text-transform:uppercase;
+    padding:.6cqw 0;border-radius:4px;
+    transition:background .2s,color .2s;
+  }
+  .proofBtn:hover{background:var(--orange);color:#140a04}
 
   /* ---------- Slide 12 · Land flips ---------- */
   .s12 h1{font-size:max(4.3cqw, 22px);line-height:1.04;margin-top:.2cqw;margin-bottom:.3cqw;max-width:80%}
@@ -441,10 +450,33 @@
   }
   .pdfModal-close:hover{color:var(--orange);border-color:var(--line)}
   .pdfModal-body{
+    position:relative;
     flex:1; overflow:auto; background:#332e28;
     display:flex; align-items:flex-start; justify-content:center;
     padding:20px;
   }
+  .proofNav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(10,7,5,.65); border:1px solid rgba(255,255,255,.14);
+    color:var(--muted); display:flex;align-items:center;justify-content:center;
+    font-size:20px; line-height:1;
+    transition:border-color .2s,color .2s,background .2s;
+  }
+  .proofNav:hover{border-color:var(--orange);color:var(--orange)}
+  .proofNav-prev{left:12px}
+  .proofNav-next{right:12px}
+  .proofDots{
+    display:flex; justify-content:center; align-items:center; gap:8px;
+    padding:10px 0; flex:0 0 auto; border-top:1px solid var(--line);
+  }
+  .proofDots button{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(255,255,255,.18); padding:0;
+    transition:background .2s,transform .2s;
+  }
+  .proofDots button.on{background:var(--orange);transform:scale(1.4)}
+  .proofDots button:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
   .pdfModal-loading{
     margin:auto; font-family:var(--mono); font-size:12px;
     letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
@@ -809,6 +841,7 @@
               <div class="vs"><div class="n">318</div><div class="l">Comments</div></div>
               <div class="vs"><div class="n">18:24</div><div class="l">Runtime</div></div>
             </div>
+            <a class="proofBtn" id="proofTrigger" href="cd-noah-3504.pdf">Proof</a>
           </div>
           <div class="vcard">
             <div class="vthumb">
@@ -1060,6 +1093,29 @@
       <button class="pdfModal-pagebtn" id="pdfPrevPage" type="button" aria-label="Previous page">‹</button>
       <span class="pdfModal-pageind" id="pdfPageIndicator">— / —</span>
       <button class="pdfModal-pagebtn" id="pdfNextPage" type="button" aria-label="Next page">›</button>
+    </div>
+  </div>
+
+  <div class="pdfBackdrop" id="proofBackdrop" hidden></div>
+  <div class="pdfModal" id="proofModal" role="dialog" aria-modal="true" aria-label="Deal proof documents" aria-hidden="true" hidden>
+    <div class="pdfModal-head">
+      <span class="pdfModal-title" id="proofTitle">// Proof</span>
+      <div class="pdfModal-actions">
+        <a class="pdfModal-fallback" id="proofFallbackLink" href="cd-noah-3504.pdf" target="_blank" rel="noopener noreferrer">Open as file ↗</a>
+        <button class="pdfModal-close" id="proofModalClose" type="button" aria-label="Close document viewer">&times;</button>
+      </div>
+    </div>
+    <div class="pdfModal-body" id="proofModalBody">
+      <button class="proofNav proofNav-prev" id="proofPrevDoc" type="button" aria-label="Previous document">‹</button>
+      <span class="pdfModal-loading" id="proofLoading">Loading document…</span>
+      <canvas class="pdfCanvas" id="proofCanvas" hidden></canvas>
+      <button class="proofNav proofNav-next" id="proofNextDoc" type="button" aria-label="Next document">›</button>
+    </div>
+    <nav class="proofDots" id="proofDots" aria-label="Select document"></nav>
+    <div class="pdfModal-foot">
+      <button class="pdfModal-pagebtn" id="proofPrevPage" type="button" aria-label="Previous page">‹</button>
+      <span class="pdfModal-pageind" id="proofPageIndicator">— / —</span>
+      <button class="pdfModal-pagebtn" id="proofNextPage" type="button" aria-label="Next page">›</button>
     </div>
   </div>
 
@@ -1329,6 +1385,174 @@
     });
   }
 
+  // Deal 01 "Proof" gallery: same pdf.js canvas approach as the appraisal
+  // viewer, extended to flip between several documents left/right.
+  var proofTrigger = document.getElementById("proofTrigger");
+  var proofBackdrop = document.getElementById("proofBackdrop");
+  var proofModal = document.getElementById("proofModal");
+  var proofModalClose = document.getElementById("proofModalClose");
+  var proofModalBody = document.getElementById("proofModalBody");
+  var proofTitle = document.getElementById("proofTitle");
+  var proofFallbackLink = document.getElementById("proofFallbackLink");
+  var proofLoading = document.getElementById("proofLoading");
+  var proofCanvas = document.getElementById("proofCanvas");
+  var proofPrevDoc = document.getElementById("proofPrevDoc");
+  var proofNextDoc = document.getElementById("proofNextDoc");
+  var proofDotsWrap = document.getElementById("proofDots");
+  var proofPrevPageBtn = document.getElementById("proofPrevPage");
+  var proofNextPageBtn = document.getElementById("proofNextPage");
+  var proofPageIndicator = document.getElementById("proofPageIndicator");
+
+  var proofDocs = [
+    { label: "3504 Noah St — Final CD", href: "cd-noah-3504.pdf" },
+    { label: "3506 Noah St — Final CD", href: "cd-noah-3506.pdf" },
+    { label: "7503 Springhill St — Final CD", href: "cd-springhill-7503.pdf" },
+    { label: "7507 Springhill St — Final CD", href: "cd-springhill-7507.pdf" }
+  ];
+  var proofDocIndex = 0;
+  var proofPageNum = 1;
+  var proofPdf = null;
+  var proofBlobUrl = null;
+  var proofRendering = false;
+  var proofPendingPage = null;
+  var proofDotEls = [];
+
+  if (proofTrigger) {
+    proofDocs.forEach(function(d, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Show " + d.label);
+      b.addEventListener("click", function(){ loadProofDoc(i); });
+      proofDotsWrap.appendChild(b);
+      proofDotEls.push(b);
+    });
+  }
+
+  function proofIsOpen(){ return proofModal.classList.contains("open"); }
+
+  function renderProofPage(num){
+    proofRendering = true;
+    proofPdf.getPage(num).then(function(page){
+      var maxW = proofModalBody.clientWidth - 40;
+      var maxH = proofModalBody.clientHeight - 40;
+      var base = page.getViewport({ scale: 1 });
+      var scale = Math.min(maxW / base.width, maxH / base.height);
+      var dpr = window.devicePixelRatio || 1;
+      var viewport = page.getViewport({ scale: scale * dpr });
+      proofCanvas.width = viewport.width;
+      proofCanvas.height = viewport.height;
+      proofCanvas.style.width = (viewport.width / dpr) + "px";
+      proofCanvas.style.height = (viewport.height / dpr) + "px";
+      var ctx = proofCanvas.getContext("2d");
+      page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function(){
+        proofRendering = false;
+        if (proofPendingPage !== null){
+          var p = proofPendingPage; proofPendingPage = null; renderProofPage(p);
+        }
+      });
+    });
+    proofPageIndicator.textContent = num + " / " + proofPdf.numPages;
+    proofPrevPageBtn.disabled = num <= 1;
+    proofNextPageBtn.disabled = num >= proofPdf.numPages;
+  }
+  function queueRenderProofPage(num){
+    if (proofRendering) proofPendingPage = num; else renderProofPage(num);
+  }
+  function goProofPage(delta){
+    if (!proofPdf) return;
+    var n = proofPageNum + delta;
+    if (n < 1 || n > proofPdf.numPages) return;
+    proofPageNum = n;
+    queueRenderProofPage(proofPageNum);
+  }
+
+  function loadProofDoc(index){
+    proofDocIndex = ((index % proofDocs.length) + proofDocs.length) % proofDocs.length;
+    var info = proofDocs[proofDocIndex];
+    proofTitle.textContent = "// Proof — " + info.label;
+    proofFallbackLink.href = info.href;
+    proofDotEls.forEach(function(d, i){ d.classList.toggle("on", i === proofDocIndex); });
+    proofLoading.hidden = false;
+    proofLoading.textContent = "Loading document…";
+    proofCanvas.hidden = true;
+    proofPageIndicator.textContent = "— / —";
+    proofPrevPageBtn.disabled = true;
+    proofNextPageBtn.disabled = true;
+    if (proofPdf){ proofPdf.destroy(); proofPdf = null; }
+    if (proofBlobUrl){ URL.revokeObjectURL(proofBlobUrl); proofBlobUrl = null; }
+
+    fetch(info.href).then(function(res){
+      if (!res.ok) throw new Error("fetch failed");
+      return res.blob();
+    }).then(function(blob){
+      proofBlobUrl = URL.createObjectURL(blob);
+      proofFallbackLink.href = proofBlobUrl;
+      if (!window.pdfjsLib || !window.pdfjsWorker) throw new Error("pdf.js unavailable");
+      return pdfjsLib.getDocument({ url: proofBlobUrl }).promise;
+    }).then(function(doc){
+      proofPdf = doc;
+      proofPageNum = 1;
+      proofLoading.hidden = true;
+      proofCanvas.hidden = false;
+      renderProofPage(proofPageNum);
+    }).catch(function(){
+      proofLoading.textContent = "Couldn't load this document — use “Open as file” above.";
+    });
+  }
+  function goProofDoc(delta){ loadProofDoc(proofDocIndex + delta); }
+
+  function openProof(){
+    proofBackdrop.hidden = false;
+    proofModal.hidden = false;
+    window.requestAnimationFrame(function(){
+      proofBackdrop.classList.add("show");
+      proofModal.classList.add("open");
+    });
+    proofModal.setAttribute("aria-hidden", "false");
+    loadProofDoc(0);
+  }
+  function closeProof(){
+    proofBackdrop.classList.remove("show");
+    proofModal.classList.remove("open");
+    proofModal.setAttribute("aria-hidden", "true");
+    window.setTimeout(function(){
+      if (!proofIsOpen()){
+        proofBackdrop.hidden = true; proofModal.hidden = true;
+        if (proofPdf){ proofPdf.destroy(); proofPdf = null; }
+        if (proofBlobUrl){ URL.revokeObjectURL(proofBlobUrl); proofBlobUrl = null; }
+      }
+    }, 280);
+    if (proofTrigger) proofTrigger.focus({ preventScroll: true });
+  }
+
+  if (proofTrigger) {
+    proofTrigger.addEventListener("click", function(e){
+      e.preventDefault();
+      openProof();
+    });
+    proofModalClose.addEventListener("click", closeProof);
+    proofBackdrop.addEventListener("click", closeProof);
+    proofPrevDoc.addEventListener("click", function(){ goProofDoc(-1); });
+    proofNextDoc.addEventListener("click", function(){ goProofDoc(1); });
+    proofPrevPageBtn.addEventListener("click", function(){ goProofPage(-1); });
+    proofNextPageBtn.addEventListener("click", function(){ goProofPage(1); });
+    window.addEventListener("resize", function(){
+      if (proofIsOpen() && proofPdf) queueRenderProofPage(proofPageNum);
+    });
+
+    var proofTouchStartX = null;
+    proofModalBody.addEventListener("touchstart", function(e){
+      proofTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    proofModalBody.addEventListener("touchend", function(e){
+      if (proofTouchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - proofTouchStartX;
+      proofTouchStartX = null;
+      if (Math.abs(dx) < 40) return;
+      if (dx < 0) goProofDoc(1); else goProofDoc(-1);
+    }, { passive: true });
+  }
+
   function goTo(n){
     n = Math.max(0, Math.min(total - 1, n));
     if (n === current || animating) return;
@@ -1344,8 +1568,14 @@
   btnDown.addEventListener("click", next);
 
   window.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && proofIsOpen()) { closeProof(); return; }
     if (e.key === "Escape" && pdfIsOpen()) { closePdf(); return; }
     if (e.key === "Escape" && menuIsOpen()) { closeMenu(); return; }
+    if (proofIsOpen()){
+      if (e.key === "ArrowRight") { e.preventDefault(); goProofDoc(1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); goProofDoc(-1); }
+      return;
+    }
     if (pdfIsOpen()){
       if (["ArrowRight", "ArrowDown", "PageDown"].indexOf(e.key) !== -1) { e.preventDefault(); goPdfPage(1); }
       else if (["ArrowLeft", "ArrowUp", "PageUp"].indexOf(e.key) !== -1) { e.preventDefault(); goPdfPage(-1); }
@@ -1360,7 +1590,7 @@
 
   var wheelLocked = false;
   window.addEventListener("wheel", function(e){
-    if (menuIsOpen() || pdfIsOpen()) return;
+    if (menuIsOpen() || pdfIsOpen() || proofIsOpen()) return;
     e.preventDefault();
     if (wheelLocked || Math.abs(e.deltaY) < 12) return;
     wheelLocked = true;
@@ -1370,11 +1600,11 @@
 
   var touchStartY = null;
   window.addEventListener("touchstart", function(e){
-    if (menuIsOpen() || pdfIsOpen()) return;
+    if (menuIsOpen() || pdfIsOpen() || proofIsOpen()) return;
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
   window.addEventListener("touchend", function(e){
-    if (menuIsOpen() || pdfIsOpen() || touchStartY === null) return;
+    if (menuIsOpen() || pdfIsOpen() || proofIsOpen() || touchStartY === null) return;
     var dy = touchStartY - e.changedTouches[0].clientY;
     touchStartY = null;
     if (Math.abs(dy) < 44) return;
