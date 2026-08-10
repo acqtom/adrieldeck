@@ -858,6 +858,7 @@
               <div class="vs"><div class="n">402</div><div class="l">Comments</div></div>
               <div class="vs"><div class="n">21:05</div><div class="l">Runtime</div></div>
             </div>
+            <a class="proofBtn" id="proofTriggerSaphira" href="saphira-apartments-appraisal.pdf">Proof</a>
           </div>
           <div class="vcard">
             <div class="vthumb">
@@ -1369,6 +1370,17 @@
       }
     }, 280);
     if (appraisalLink) appraisalLink.focus({ preventScroll: true });
+  }
+
+  var proofTriggerSaphira = document.getElementById("proofTriggerSaphira");
+  if (proofTriggerSaphira && appraisalLink) {
+    // Reuses appraisalLink's href rather than its own — same document, and
+    // avoids embedding a second copy of it in the self-contained artifact
+    // preview (its href there is a large data: URI).
+    proofTriggerSaphira.addEventListener("click", function(e){
+      e.preventDefault();
+      openPdf(appraisalLink.getAttribute("href"));
+    });
   }
 
   if (appraisalLink) {
