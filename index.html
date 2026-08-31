@@ -123,18 +123,21 @@
 
   /* ---------- Slide 4 ---------- */
   .s4 h1{font-size:max(4.9cqw, 24px);line-height:1.03;margin-top:1.4cqw;max-width:80%}
-  .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:3.4cqw;margin-top:auto;padding-bottom:1cqw}
+  .paths{display:grid;grid-template-columns:repeat(2,1fr);gap:3.4cqw;margin-top:1.6cqw;padding-bottom:1cqw}
   .path{border-top:1px solid var(--line);padding-top:1.3cqw}
   .path .tag{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
   .path .pt{font-size:max(1.75cqw, 15px);font-weight:600;margin:.9cqw 0 1cqw}
   .path .pd{font-size:max(1.25cqw, 13px);line-height:1.46;color:var(--muted)}
+  .s4 .lead{font-size:max(1.3cqw, 13px);line-height:1.5;color:var(--muted);max-width:70%;margin-top:1cqw}
 
   /* ---------- Slide 5 ---------- */
   .s5 h1{font-size:max(4.7cqw, 24px);margin-top:1.2cqw;margin-bottom:1.8cqw}
   .stages{display:grid;grid-template-columns:repeat(4,1fr);gap:0;flex:1}
   .stage-col{padding:0 1.8cqw;border-left:1px solid var(--line-soft)}
   .stage-col:first-child{padding-left:0;border-left:none}
-  .stage-col .st{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.16em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:.7cqw;border-top:1px solid var(--line);padding-top:1cqw}
+  .phasetag{font-family:var(--mono);font-size:max(.72cqw, 10px);letter-spacing:.16em;text-transform:uppercase;color:var(--orange);border-top:1px solid var(--line);padding-top:1cqw;display:block}
+  .phasetag.phase2{color:var(--dim)}
+  .stage-col .st{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.16em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:.7cqw;margin-top:.7cqw}
   .stage-col .st .d{width:.55cqw;height:.55cqw;border-radius:50%;background:var(--orange)}
   .stage-col .sname{font-size:max(1.85cqw, 15px);font-weight:600;margin:1cqw 0 .8cqw}
   .stage-col .sdesc{font-size:max(1.15cqw, 12px);line-height:1.4;color:var(--muted);padding-bottom:1.2cqw;border-bottom:1px solid var(--line-soft);min-height:5.4cqw}
@@ -626,14 +629,18 @@
     <section class="page s4">
       <div class="topbar">
         <div class="brand"><span class="slash">//</span> INVESTORS BLUEPRINT</div>
-        <div class="nav-r"><span class="accent">WHEN YOU JOIN</span><span>04 / 15</span></div>
+        <div class="nav-r"><span class="accent">TWO PHASES</span><span>04 / 15</span></div>
       </div>
-      <span class="eyebrow" style="margin-top:1.2cqw">Within 24 hours</span>
-      <h1 class="disp">Onboarding meets you where you are.</h1>
+      <span class="eyebrow" style="margin-top:1.2cqw">How this actually starts</span>
+      <h1 class="disp">You have 90 days before your capital needs to show up.</h1>
+      <p class="lead">Every deal starts the same way: a learning phase, then the deal. You could land yours in 30 days, 60, or the full 90 — but your investment capital doesn't need to be ready until a deal is.</p>
       <div class="paths">
-        <div class="path"><div class="tag">Path A</div><div class="pt">Already have a deal</div><div class="pd">The deal comes first. Onboarding becomes a full deal review — numbers, contracts, what's been missed. The 12-month clock starts immediately.</div></div>
-        <div class="path"><div class="tag">Path B</div><div class="pt">Actively looking</div><div class="pd">Buy box locked, target market confirmed, plugged into the off-market pipeline. Systems installed in the first two weeks. Clock starts on close.</div></div>
-        <div class="path"><div class="tag">Path C</div><div class="pt">Starting from scratch</div><div class="pd">Capital structure, entity setup, primary market. Buy box, ARV band, build cost, margin floor and hold period all locked. Roadmap built from zero.</div></div>
+        <div class="path"><div class="tag">Phase 1 · Day 0–90</div><div class="pt">The learning phase</div><div class="pd">Underwriting reps on real numbers. Learning to find off-market deals most investors never see. Getting connected to Adriel's vetted lenders, contractors, builders, and managers. Setting up your own private off-market deal-flow system.</div></div>
+        <div class="path"><div class="tag">Phase 2 · The deal</div><div class="pt">Capital shows up now</div><div class="pd">The sourcing, the underwriting, the relationships — all already done. This is the only point your investment capital actually needs to be in place. The moment the right deal appears, you move.</div></div>
+      </div>
+      <div class="statenote">
+        <span class="tag">Why this matters</span>
+        <p>This is exactly how Adriel runs 10+ developments at once — he does the underwriting, sourcing, and relationship-building long before a deal is ever on the table, so when a good one shows up, he moves on it immediately. Phase 1 gives you that same edge.</p>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
     </section>
@@ -645,16 +652,18 @@
         <div class="nav-r"><span class="accent">THE ROADMAP</span><span>05 / 15</span></div>
       </div>
       <span class="eyebrow" style="margin-top:1cqw">Full arc of a deal</span>
-      <h1 class="disp">Start to finish, four stages.</h1>
+      <h1 class="disp">Four stages, two phases.</h1>
       <div class="stages">
         <div class="stage-col">
+          <div class="phasetag">Phase 1</div>
           <div class="st"><span class="d"></span>Stage 01</div>
           <div class="sname">Foundation</div>
-          <div class="sdesc">Pre-purchase. Before the clock starts.</div>
+          <div class="sdesc">The learning phase. Underwriting, sourcing, network, deal-flow system — capital not required yet.</div>
           <div class="walk">You walk away with</div>
           <div class="sout">First lot under contract, fully underwritten, financing lined up.</div>
         </div>
         <div class="stage-col">
+          <div class="phasetag phase2">Phase 2</div>
           <div class="st"><span class="d"></span>Stage 02</div>
           <div class="sname">Mobilisation</div>
           <div class="sdesc">Contract → break ground. 2–8 months permitting.</div>
@@ -662,6 +671,7 @@
           <div class="sout">Crew on site. Draw schedule running. No surprises.</div>
         </div>
         <div class="stage-col">
+          <div class="phasetag phase2">Phase 2</div>
           <div class="st"><span class="d"></span>Stage 03</div>
           <div class="sname">Execution</div>
           <div class="sdesc">Build phase. 10–14 months with buffer.</div>
@@ -669,6 +679,7 @@
           <div class="sout">Deal 1 under roof. Deal 2 in the pipeline.</div>
         </div>
         <div class="stage-col">
+          <div class="phasetag phase2">Phase 2</div>
           <div class="st"><span class="d"></span>Stage 04</div>
           <div class="sname">Exit &amp; Reinvest</div>
           <div class="sdesc">Sale and beyond.</div>
