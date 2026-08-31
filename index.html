@@ -250,39 +250,26 @@
   .price h1{font-size:max(4.9cqw, 24px);line-height:1.02;margin:1.2cqw 0 1.6cqw}
   .price .lead{font-size:max(1.35cqw, 13px);line-height:1.5;color:var(--muted);max-width:88%}
   .plans{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .plans.single{grid-template-columns:1fr}
   .plan{display:flex;flex-direction:column}
   .plan.hot{background:transparent}
   .phead{padding:1.6cqw 1.7cqw 1.7cqw;min-height:14cqw}
-  .plan.norm .phead{background:rgba(255,255,255,.015)}
   .plan.hot .phead{background:linear-gradient(135deg,#ff8a2b,#f2660f 70%,#e2530a)}
   .phead .plabel{font-size:max(1.15cqw, 12px);color:var(--muted)}
   .plan.hot .plabel{display:inline-flex;background:#120a05;color:#ffd9b0;font-size:max(.86cqw, 11px);letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.6cqw 1cqw;border-radius:3px}
   .phead .pprice{font-size:max(5cqw, 26px);font-weight:600;letter-spacing:-.02em;margin-top:.8cqw;color:#6f645c;text-decoration:line-through;text-decoration-thickness:2px}
   .plan.hot .pprice{color:#140a04;text-decoration:none;margin-top:.7cqw}
-  .phead .ptag{display:inline-block;margin-top:1cqw;background:#0d0603;color:#fff;font-size:max(1.05cqw, 11px);font-weight:600;padding:.7cqw 1cqw;border-radius:3px}
   .payopts{margin-top:.9cqw}
   .payopt{display:flex;align-items:baseline;gap:.7cqw}
   .payopt .pm{font-size:max(3.5cqw, 24px);font-weight:600;letter-spacing:-.02em;color:#140a04;line-height:1}
   .payopt .pmm{font-size:max(1.15cqw, 12px);font-weight:500;color:#3a1c07}
   .paydiv{height:1px;background:rgba(20,10,4,.28);margin:.85cqw 0}
-  .plan.norm .payopt .pm{color:#6f645c;text-decoration:line-through;text-decoration-thickness:2px}
-  .plan.norm .payopt .pmm{color:var(--dim)}
-  .plan.norm .paydiv{background:var(--line)}
 
   /* ---------- Slide 15 (close) ---------- */
   .s15 .split{grid-template-columns:0.95fr 1.12fr;align-items:start;gap:5cqw}
   .s15 h1{font-size:max(4.6cqw, 23px);line-height:1.02;margin:1.1cqw 0 1.1cqw}
   .s15 .lead{font-size:max(1.3cqw, 13px);line-height:1.5;color:var(--muted);max-width:92%}
   .startprice{display:flex;align-items:baseline;gap:1cqw;margin:.5cqw 0 .5cqw}
-  .countdown{margin:1.8cqw 0 0;display:flex;align-items:baseline;gap:1cqw;flex-wrap:wrap}
-  .countdown[hidden]{display:none}
-  .countdown-label{font-family:var(--mono);font-size:max(.86cqw, 11px);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
-  .countdown-label b{color:var(--orange);font-weight:600}
-  .countdown-timer{display:flex;align-items:baseline;gap:.6cqw}
-  .countdown-timer[hidden]{display:none}
-  .cd-unit{display:flex;align-items:baseline;gap:.2cqw;font-variant-numeric:tabular-nums}
-  .cd-n{font-family:var(--mono);font-size:max(1.3cqw, 15px);font-weight:600;color:var(--orange)}
-  .cd-l{font-family:var(--mono);font-size:max(.7cqw, 10px);color:var(--dim);text-transform:uppercase}
   .startprice .amt{font-size:max(7cqw, 40px);font-weight:600;letter-spacing:-.03em;line-height:.85;
     background:linear-gradient(95deg,#ffc35a,#ff8f30 40%,#f2661a 72%,#d9440a);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -317,10 +304,6 @@
   .ctotal{display:flex;justify-content:space-between;align-items:center;padding:.9cqw 1.5cqw;border-top:1px solid var(--line);background:rgba(34,197,94,.08)}
   .ctotal .l{font-size:max(1.25cqw, 13px);font-weight:500;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
   .ctotal .r{font-size:max(2.1cqw, 16px);font-weight:600;color:var(--green)}
-  .prowf{display:flex;justify-content:space-between;align-items:center;gap:1cqw;padding:1.05cqw 1.7cqw;border-top:1px solid var(--line);min-height:4.4cqw}
-  .prowf .f{font-size:max(.98cqw, 12px);color:var(--muted);line-height:1.32}
-  .prowf .v{font-size:max(1.15cqw, 12px);color:var(--ink-2);white-space:nowrap}
-  .plan.norm .prowf{border-right:1px solid var(--line)}
 
   /* ============ Navigation chrome (fixed, does not slide with pages) ============ */
   .navctl{
@@ -552,7 +535,6 @@
     .stage-col:first-child{padding-bottom:1.4rem}
     .s1 .sub,.s1 .body{max-width:none}
     .photo{width:100%}
-    .plan.norm .prowf{border-right:none}
 
     .s1 h1{font-size:12vw}
     .s2 h1,.s5 h1,.s8 h1,.price h1{font-size:9vw}
@@ -959,41 +941,44 @@
       <div class="split">
         <div>
           <span class="eyebrow">Adriel runs this personally</span>
-          <h1 class="disp">5 spots at this rate.</h1>
-          <p class="lead">A handful of spots open at a time. Once these five are filled, it goes back to the standard rate of $1,667 a month.</p>
+          <h1 class="disp">Split it over 12 or 24 months.</h1>
+          <p class="lead">One flat rate — paid monthly over 12 months, or stretched across 24 if that works better for your cash flow.</p>
         </div>
-        <div class="plans">
-          <div class="plan norm">
-            <div class="phead"><div class="plabel">Normal price</div>
-              <div class="payopts">
-                <div class="payopt"><span class="pm">$1,667</span><span class="pmm">/mo · 12 months</span></div>
-                <div class="paydiv"></div>
-                <div class="payopt"><span class="pm">$833</span><span class="pmm">/mo · 24 months</span></div>
-              </div>
-            </div>
-            <div class="prowf"><span class="f">12 months of access</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">1 call per week with Adriel</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Every deal reviewed before you sign</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">System setup for personal inbound off-market deal flow. Access to occasional off-market deal flow in Texas</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Vetted lender &amp; contractor network</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Only 5 spots open at this price for this month</span><span class="v">—</span></div>
-          </div>
+        <div class="plans single">
           <div class="plan hot">
-            <div class="phead"><div class="plabel">These 5 spots</div>
+            <div class="phead"><div class="plabel">Your rate</div>
               <div class="payopts">
                 <div class="payopt"><span class="pm">$1,250</span><span class="pmm">/mo · 12 months</span></div>
                 <div class="paydiv"></div>
                 <div class="payopt"><span class="pm">$625</span><span class="pmm">/mo · 24 months</span></div>
               </div>
             </div>
-            <div class="prowf"><span class="f">12 months of access</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">1 call per week with Adriel</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Every deal reviewed before you sign</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">System setup for personal inbound off-market deal flow. Access to occasional off-market deal flow in Texas</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Vetted lender &amp; contractor network</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Only 5 spots open at this price for this month</span><span class="v">Included</span></div>
           </div>
         </div>
+      </div>
+      <div class="costbox">
+        <div class="cost-h"><span class="ct">The cost of going it alone</span></div>
+        <div class="crow">
+          <span class="ci">General contractor markup</span>
+          <span class="cs"><small>Industry standard</small>+$20K–$30K per house</span>
+          <span class="cb"><small>With Investors Blueprint</small>Paid at cost — Adriel's builder network</span>
+        </div>
+        <div class="crow">
+          <span class="ci">Tiles</span>
+          <span class="cs"><small>Industry standard</small>$8,000</span>
+          <span class="cb"><small>With Investors Blueprint</small>$4,000</span>
+        </div>
+        <div class="crow">
+          <span class="ci">Windows</span>
+          <span class="cs"><small>Industry standard</small>$4,000–$6,000</span>
+          <span class="cb"><small>With Investors Blueprint</small>$2,000–$3,000</span>
+        </div>
+        <div class="crow">
+          <span class="ci">Subcontractors</span>
+          <span class="cs"><small>Industry standard</small>Retail rates</span>
+          <span class="cb"><small>With Investors Blueprint</small>Vetted network rates</span>
+        </div>
+        <div class="ctotal"><span class="l">What going it alone costs you</span><span class="r">~$30K–$40K per house</span></div>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
     </section>
@@ -1007,29 +992,38 @@
       <div class="split">
         <div>
           <span class="eyebrow">Adriel runs this personally</span>
-          <h1 class="disp">5 spots at this rate.</h1>
-          <p class="lead">A handful of spots open at a time. Once these five are filled, it goes back to the standard rate of $20,000.</p>
+          <h1 class="disp">One flat rate: $15,000.</h1>
+          <p class="lead">Paid once, in full. Covers the full 12 months — deal review, the network, everything else included.</p>
         </div>
-        <div class="plans">
-          <div class="plan norm">
-            <div class="phead"><div class="plabel">Normal price</div><div class="pprice">$20,000</div></div>
-            <div class="prowf"><span class="f">12 months of access</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">1 call per week with Adriel</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Every deal reviewed before you sign</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">System setup for personal inbound off-market deal flow. Access to occasional off-market deal flow in Texas</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Vetted lender &amp; contractor network</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Only 5 spots open at this price for this month</span><span class="v">—</span></div>
-          </div>
+        <div class="plans single">
           <div class="plan hot">
-            <div class="phead"><div class="plabel">These 5 spots</div><div class="pprice">$15,000</div><div class="ptag">A $5,000 drop off the normal rate.</div></div>
-            <div class="prowf"><span class="f">12 months of access</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">1 call per week with Adriel</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Every deal reviewed before you sign</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">System setup for personal inbound off-market deal flow. Access to occasional off-market deal flow in Texas</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Vetted lender &amp; contractor network</span><span class="v">Included</span></div>
-            <div class="prowf"><span class="f">Only 5 spots open at this price for this month</span><span class="v">Included</span></div>
+            <div class="phead"><div class="plabel">Your investment</div><div class="pprice">$15,000</div></div>
           </div>
         </div>
+      </div>
+      <div class="costbox">
+        <div class="cost-h"><span class="ct">The cost of going it alone</span></div>
+        <div class="crow">
+          <span class="ci">General contractor markup</span>
+          <span class="cs"><small>Industry standard</small>+$20K–$30K per house</span>
+          <span class="cb"><small>With Investors Blueprint</small>Paid at cost — Adriel's builder network</span>
+        </div>
+        <div class="crow">
+          <span class="ci">Tiles</span>
+          <span class="cs"><small>Industry standard</small>$8,000</span>
+          <span class="cb"><small>With Investors Blueprint</small>$4,000</span>
+        </div>
+        <div class="crow">
+          <span class="ci">Windows</span>
+          <span class="cs"><small>Industry standard</small>$4,000–$6,000</span>
+          <span class="cb"><small>With Investors Blueprint</small>$2,000–$3,000</span>
+        </div>
+        <div class="crow">
+          <span class="ci">Subcontractors</span>
+          <span class="cs"><small>Industry standard</small>Retail rates</span>
+          <span class="cb"><small>With Investors Blueprint</small>Vetted network rates</span>
+        </div>
+        <div class="ctotal"><span class="l">What going it alone costs you</span><span class="r">~$30K–$40K per house</span></div>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
     </section>
@@ -1044,18 +1038,9 @@
         <div>
           <span class="eyebrow dot">Your spot is open</span>
           <h1 class="disp">Start today for as low as $625/mo.</h1>
-          <p class="lead">The 24-month plan, split down the middle. Lock one of the five spots now — before it goes back to the standard rate.</p>
-          <div class="countdown" id="countdown">
-            <span class="countdown-label" id="countdownLabel">Price increases to <b>$20,000</b> in</span>
-            <div class="countdown-timer" id="countdownTimer">
-              <span class="cd-unit"><span class="cd-n" id="cdD">3</span><span class="cd-l">d</span></span>
-              <span class="cd-unit"><span class="cd-n" id="cdH">00</span><span class="cd-l">h</span></span>
-              <span class="cd-unit"><span class="cd-n" id="cdM">00</span><span class="cd-l">m</span></span>
-              <span class="cd-unit"><span class="cd-n" id="cdS">00</span><span class="cd-l">s</span></span>
-            </div>
-          </div>
+          <p class="lead">The 24-month plan, split down the middle.</p>
           <div class="startprice"><span class="amt">$625</span><span class="per">/ month</span></div>
-          <div class="start-sub">On the 24-month plan · only 5 spots at this rate for this month</div>
+          <div class="start-sub">On the 24-month plan</div>
           <div class="btn-fill">Claim your spot today →</div>
         </div>
         <div>
@@ -1728,52 +1713,6 @@
   }, { passive: true });
 
   render();
-})();
-</script>
-<script>
-(function(){
-  "use strict";
-  // Daily-resetting price-increase countdown: the deadline is always
-  // "today's local midnight + 2 days", recomputed fresh on every tick.
-  // That means it never needs any stored state — it naturally counts
-  // down from ~1d 23h 59m 59s (just after each midnight) to ~1d 00h
-  // (just before the next one), then jumps back up every day at
-  // midnight instead of ever permanently running out.
-  var countdownEl = document.getElementById("countdown");
-  var labelEl = document.getElementById("countdownLabel");
-  var timerEl = document.getElementById("countdownTimer");
-  if (!countdownEl || !labelEl || !timerEl) return;
-
-  var cdD = document.getElementById("cdD");
-  var cdH = document.getElementById("cdH");
-  var cdM = document.getElementById("cdM");
-  var cdS = document.getElementById("cdS");
-  var timer = null;
-
-  function pad2(n){ return n < 10 ? "0" + n : "" + n; }
-
-  function nextDeadline(){
-    var now = new Date();
-    var todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    return todayMidnight.getTime() + 2 * 86400000;
-  }
-
-  function tick(){
-    var remaining = nextDeadline() - Date.now();
-    if (remaining <= 0){
-      labelEl.innerHTML = "Price is now <b>$20,000</b>";
-      timerEl.hidden = true;
-      if (timer) clearInterval(timer);
-      return;
-    }
-    var totalSec = Math.floor(remaining / 1000);
-    cdD.textContent = Math.floor(totalSec / 86400);
-    cdH.textContent = pad2(Math.floor((totalSec % 86400) / 3600));
-    cdM.textContent = pad2(Math.floor((totalSec % 3600) / 60));
-    cdS.textContent = pad2(totalSec % 60);
-  }
-  tick();
-  timer = setInterval(tick, 1000);
 })();
 </script>
 </body>
