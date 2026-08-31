@@ -245,16 +245,27 @@
   .prow.profit .pl,.prow.profit .pv{color:var(--orange);font-weight:600}
   .fliptime{margin-top:.6cqw;font-family:var(--mono);font-size:max(.86cqw, 11px);color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
 
-  /* ---------- Slides 13 & 14 ---------- */
+  /* ---------- Slide 13 ---------- */
+  .s13 h1{font-size:max(4.9cqw, 24px);line-height:1.03;margin-top:1.4cqw;max-width:80%}
+  .s13 .lead{font-size:max(1.3cqw, 13px);line-height:1.5;color:var(--muted);max-width:70%;margin-top:1cqw}
+
+  /* ---------- Slide 14 ---------- */
   .price .split{grid-template-columns:0.82fr 1.35fr;align-items:center;gap:4.5cqw}
   .price h1{font-size:max(4.9cqw, 24px);line-height:1.02;margin:1.2cqw 0 1.6cqw}
   .price .lead{font-size:max(1.35cqw, 13px);line-height:1.5;color:var(--muted);max-width:88%}
   .plans{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
-  .plans.single{grid-template-columns:1fr}
   .plan{display:flex;flex-direction:column}
   .plan.hot{background:transparent}
   .phead{padding:1.6cqw 1.7cqw 1.7cqw;min-height:14cqw}
   .plan.hot .phead{background:linear-gradient(135deg,#ff8a2b,#f2660f 70%,#e2530a)}
+  .plan.opt{background:transparent}
+  .plan.opt:first-child{border-right:1px solid var(--line)}
+  .plan.opt .phead{background:rgba(255,255,255,.02)}
+  .plan.opt .plabel{display:inline-flex;background:rgba(255,255,255,.06);color:var(--ink-2);font-size:max(.86cqw, 11px);letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.6cqw 1cqw;border-radius:3px}
+  .plan.opt .pprice{color:var(--ink);text-decoration:none;font-size:max(5cqw, 26px);font-weight:600;letter-spacing:-.02em;margin-top:.8cqw}
+  .plan.opt .payopt .pm{color:var(--ink)}
+  .plan.opt .payopt .pmm{color:var(--muted)}
+  .plan.opt .paydiv{background:var(--line)}
   .phead .plabel{font-size:max(1.15cqw, 12px);color:var(--muted)}
   .plan.hot .plabel{display:inline-flex;background:#120a05;color:#ffd9b0;font-size:max(.86cqw, 11px);letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.6cqw 1cqw;border-radius:3px}
   .phead .pprice{font-size:max(5cqw, 26px);font-weight:600;letter-spacing:-.02em;margin-top:.8cqw;color:#6f645c;text-decoration:line-through;text-decoration-thickness:2px}
@@ -531,6 +542,7 @@
       row-gap:1.8rem;
     }
     .crow{grid-template-columns:1fr !important;row-gap:.5rem;align-items:start}
+    .plan.opt:first-child{border-right:none}
     .stage-col{border-left:none;padding:0 0 1.4rem}
     .stage-col:first-child{padding-bottom:1.4rem}
     .s1 .sub,.s1 .body{max-width:none}
@@ -538,7 +550,7 @@
 
     .s1 h1{font-size:12vw}
     .s2 h1,.s5 h1,.s8 h1,.price h1{font-size:9vw}
-    .s3 h1,.s4 h1,.s6 h1,.s7 h1,.s9 h1,.s10 h1,.s12 h1,.s15 h1{font-size:8vw;max-width:none}
+    .s3 h1,.s4 h1,.s6 h1,.s7 h1,.s9 h1,.s10 h1,.s12 h1,.s13 h1,.s15 h1{font-size:8vw;max-width:none}
     .s12 .fine{max-width:none}
     .sp h1{font-size:8vw}
     .pf-head{flex-direction:column;align-items:flex-start}
@@ -933,31 +945,16 @@
     </section>
 
     <!-- ===== 13 ===== -->
-    <section class="page s13 price">
+    <section class="page s13">
       <div class="topbar">
         <div class="brand"><span class="slash">//</span> INVESTORS BLUEPRINT</div>
-        <div class="nav-r"><span class="accent">PAYMENT PLAN</span><span>13 / 15</span></div>
+        <div class="nav-r"><span class="accent">THE REAL COST</span><span>13 / 15</span></div>
       </div>
-      <div class="split">
-        <div>
-          <span class="eyebrow">Adriel runs this personally</span>
-          <h1 class="disp">Split it over 12 or 24 months.</h1>
-          <p class="lead">One flat rate — paid monthly over 12 months, or stretched across 24 if that works better for your cash flow.</p>
-        </div>
-        <div class="plans single">
-          <div class="plan hot">
-            <div class="phead"><div class="plabel">Your rate</div>
-              <div class="payopts">
-                <div class="payopt"><span class="pm">$1,250</span><span class="pmm">/mo · 12 months</span></div>
-                <div class="paydiv"></div>
-                <div class="payopt"><span class="pm">$625</span><span class="pmm">/mo · 24 months</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <span class="eyebrow" style="margin-top:1.2cqw">What builders don't tell you</span>
+      <h1 class="disp">Going it alone costs $30K–$40K a house.</h1>
+      <p class="lead">Markups, retail pricing, and no one negotiating on your behalf — it adds up fast, on every single build. Here's exactly where it goes.</p>
       <div class="costbox">
-        <div class="cost-h"><span class="ct">The cost of going it alone</span></div>
+        <div class="cost-h"><span class="ct">The breakdown</span></div>
         <div class="crow">
           <span class="ci">General contractor markup</span>
           <span class="cs"><small>Industry standard</small>+$20K–$30K per house</span>
@@ -987,43 +984,28 @@
     <section class="page s14 price">
       <div class="topbar">
         <div class="brand"><span class="slash">//</span> INVESTORS BLUEPRINT</div>
-        <div class="nav-r"><span class="accent">INVESTMENT</span><span>14 / 15</span></div>
+        <div class="nav-r"><span class="accent">PAYMENT PLAN</span><span>14 / 15</span></div>
       </div>
       <div class="split">
         <div>
           <span class="eyebrow">Adriel runs this personally</span>
-          <h1 class="disp">One flat rate: $15,000.</h1>
-          <p class="lead">Paid once, in full. Covers the full 12 months — deal review, the network, everything else included.</p>
+          <h1 class="disp">Split it, or pay it in full.</h1>
+          <p class="lead">Same program either way — pick whichever works better for your cash flow.</p>
         </div>
-        <div class="plans single">
-          <div class="plan hot">
-            <div class="phead"><div class="plabel">Your investment</div><div class="pprice">$15,000</div></div>
+        <div class="plans">
+          <div class="plan opt">
+            <div class="phead"><div class="plabel">Monthly</div>
+              <div class="payopts">
+                <div class="payopt"><span class="pm">$1,250</span><span class="pmm">/mo · 12 months</span></div>
+                <div class="paydiv"></div>
+                <div class="payopt"><span class="pm">$625</span><span class="pmm">/mo · 24 months</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="plan opt">
+            <div class="phead"><div class="plabel">Pay in full</div><div class="pprice">$15,000</div></div>
           </div>
         </div>
-      </div>
-      <div class="costbox">
-        <div class="cost-h"><span class="ct">The cost of going it alone</span></div>
-        <div class="crow">
-          <span class="ci">General contractor markup</span>
-          <span class="cs"><small>Industry standard</small>+$20K–$30K per house</span>
-          <span class="cb"><small>With Investors Blueprint</small>Paid at cost — Adriel's builder network</span>
-        </div>
-        <div class="crow">
-          <span class="ci">Tiles</span>
-          <span class="cs"><small>Industry standard</small>$8,000</span>
-          <span class="cb"><small>With Investors Blueprint</small>$4,000</span>
-        </div>
-        <div class="crow">
-          <span class="ci">Windows</span>
-          <span class="cs"><small>Industry standard</small>$4,000–$6,000</span>
-          <span class="cb"><small>With Investors Blueprint</small>$2,000–$3,000</span>
-        </div>
-        <div class="crow">
-          <span class="ci">Subcontractors</span>
-          <span class="cs"><small>Industry standard</small>Retail rates</span>
-          <span class="cb"><small>With Investors Blueprint</small>Vetted network rates</span>
-        </div>
-        <div class="ctotal"><span class="l">What going it alone costs you</span><span class="r">~$30K–$40K per house</span></div>
       </div>
       <div class="footer"><span>ADRIEL HSU</span><span>PROPERTYHSU.COM</span></div>
     </section>
