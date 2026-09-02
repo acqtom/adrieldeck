@@ -254,27 +254,15 @@
   .price h1{font-size:max(4.9cqw, 24px);line-height:1.02;margin:1.2cqw 0 1.6cqw}
   .price .lead{font-size:max(1.35cqw, 13px);line-height:1.5;color:var(--muted);max-width:88%}
   .plans{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .plans.single{grid-template-columns:1fr}
   .plan{display:flex;flex-direction:column}
   .plan.hot{background:transparent}
   .phead{padding:1.6cqw 1.7cqw 1.7cqw;min-height:14cqw}
   .plan.hot .phead{background:linear-gradient(135deg,#ff8a2b,#f2660f 70%,#e2530a)}
-  .plan.opt{background:transparent}
-  .plan.opt:first-child{border-right:1px solid var(--line)}
-  .plan.opt .phead{background:rgba(255,255,255,.02)}
-  .plan.opt .plabel{display:inline-flex;background:rgba(255,255,255,.06);color:var(--ink-2);font-size:max(.86cqw, 11px);letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.6cqw 1cqw;border-radius:3px}
-  .plan.opt .pprice{color:var(--ink);text-decoration:none;font-size:max(5cqw, 26px);font-weight:600;letter-spacing:-.02em;margin-top:.8cqw}
-  .plan.opt .payopt .pm{color:var(--ink)}
-  .plan.opt .payopt .pmm{color:var(--muted)}
-  .plan.opt .paydiv{background:var(--line)}
   .phead .plabel{font-size:max(1.15cqw, 12px);color:var(--muted)}
   .plan.hot .plabel{display:inline-flex;background:#120a05;color:#ffd9b0;font-size:max(.86cqw, 11px);letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.6cqw 1cqw;border-radius:3px}
   .phead .pprice{font-size:max(5cqw, 26px);font-weight:600;letter-spacing:-.02em;margin-top:.8cqw;color:#6f645c;text-decoration:line-through;text-decoration-thickness:2px}
   .plan.hot .pprice{color:#140a04;text-decoration:none;margin-top:.7cqw}
-  .payopts{margin-top:.9cqw}
-  .payopt{display:flex;align-items:baseline;gap:.7cqw}
-  .payopt .pm{font-size:max(3.5cqw, 24px);font-weight:600;letter-spacing:-.02em;color:#140a04;line-height:1}
-  .payopt .pmm{font-size:max(1.15cqw, 12px);font-weight:500;color:#3a1c07}
-  .paydiv{height:1px;background:rgba(20,10,4,.28);margin:.85cqw 0}
 
   /* ---------- Slide 15 (close) ---------- */
   .s15 .split{grid-template-columns:0.95fr 1.12fr;align-items:start;gap:5cqw}
@@ -542,7 +530,6 @@
       row-gap:1.8rem;
     }
     .crow{grid-template-columns:1fr !important;row-gap:.5rem;align-items:start}
-    .plan.opt:first-child{border-right:none}
     .stage-col{border-left:none;padding:0 0 1.4rem}
     .stage-col:first-child{padding-bottom:1.4rem}
     .s1 .sub,.s1 .body{max-width:none}
@@ -990,21 +977,12 @@
       <div class="split">
         <div>
           <span class="eyebrow">Adriel runs this personally</span>
-          <h1 class="disp">Split it, or pay it in full.</h1>
-          <p class="lead">Same program either way — pick whichever works better for your cash flow.</p>
+          <h1 class="disp">One flat rate: $15,000.</h1>
+          <p class="lead">Paid once, in full. Covers the full 12 months — deal review, the network, everything else included.</p>
         </div>
-        <div class="plans">
-          <div class="plan opt">
-            <div class="phead"><div class="plabel">Monthly</div>
-              <div class="payopts">
-                <div class="payopt"><span class="pm">$1,250</span><span class="pmm">/mo · 12 months</span></div>
-                <div class="paydiv"></div>
-                <div class="payopt"><span class="pm">$625</span><span class="pmm">/mo · 24 months</span></div>
-              </div>
-            </div>
-          </div>
+        <div class="plans single">
           <div class="plan hot">
-            <div class="phead"><div class="plabel">Pay in full</div><div class="pprice">$15,000</div></div>
+            <div class="phead"><div class="plabel">Your investment</div><div class="pprice">$15,000</div></div>
           </div>
         </div>
       </div>
